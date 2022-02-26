@@ -72,31 +72,24 @@ public class ConsoleMessageSocket extends TimerTask {
    */
   @Override
   public void run() {
-    if (lastSend == null) {
-      try {
-        lastSend = SocketConsoleClient.getLogs().get();
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      } catch (ExecutionException e) {
-        e.printStackTrace();
-      }
-      sendMessage(lastSend);
+    String now;
+    try {
+      now = SocketConsoleClient.getLogs().get();
+    } catch (InterruptedException | ExecutionException e) {
+      e.printStackTrace();
       return;
-    } else {
-      String now = null;
-      try {
-        now = SocketConsoleClient.getLogs().get();
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      } catch (ExecutionException e) {
-        e.printStackTrace();
-      }
-      if (now.equals(lastSend)) {
-        return;
-      } else {
-        lastSend = now;
-        sendMessage(lastSend);
-      }
+    }
+
+    if (now.length() > 5000) {
+      now = now.substring(now.length() - 5000);
+    }
+
+    if (lastSend == null) {
+      lastSend = now;
+      sendMessage(lastSend);
+    } else if (!now.equals(lastSend)) {
+      lastSend = now;
+      sendMessage(lastSend);
     }
   }
 }
