@@ -27,7 +27,7 @@ public class ConsoleMessageSocket extends TimerTask {
       return;
     }
     String token = session.getRequestParameterMap().get("token").stream().findFirst().orElse("");
-    if (userService.isValidToken(token, session.getRequestURI().getHost())) {
+    if (userService.isValidToken(token, null)) {
       this.session = session;
       this.token = token;
       this.lastSend = null;
@@ -43,7 +43,7 @@ public class ConsoleMessageSocket extends TimerTask {
     userService.destroyToken(token);
     try {
       session.close();
-    } catch (IOException e) {
+    } catch (Exception e) {
     }
   }
 

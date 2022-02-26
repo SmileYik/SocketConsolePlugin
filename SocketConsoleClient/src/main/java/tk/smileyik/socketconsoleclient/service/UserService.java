@@ -48,7 +48,7 @@ public class UserService {
     if (token == null) {
       return false;
     }
-    return tokens.containsKey(token) && tokensToIp.get(token).equalsIgnoreCase(remoteIp);
+    return tokens.containsKey(token) && (remoteIp == null || tokensToIp.get(token).equalsIgnoreCase(remoteIp));
   }
 
   public void destroyToken(String token) {
