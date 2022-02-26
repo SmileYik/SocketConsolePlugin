@@ -1,0 +1,4 @@
+name: SocketConsole
+main: tk.smileyik.socketconsole.SocketConsole
+version: 1.0
+author: SmileYik

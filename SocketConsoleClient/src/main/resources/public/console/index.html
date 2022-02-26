@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Console</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body>
+<div>
+    <textarea id="logArea" readonly="readonly"></textarea>
+    <div id="command-div">
+        <input id="command-input" placeholder="这里输入指令" />
+        <input id="auto-scroll" type="checkbox" checked title="日志自动滚动">
+    </div>
+</div>
+
+<script src="js/console.js"></script>
+<script>
+    consoleSocket.start()
+</script>
+</body>
+</html>

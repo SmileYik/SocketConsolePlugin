@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#logArea {
+    display: block;
+    width: 95%;
+    height: 90vh;
+    margin: 1vh auto auto;
+}
+
+#command-div {
+    width: 95%;
+    height: 5vh;
+    line-height: 5vh;
+    margin: 1vh auto auto;
+}
+
+#command-input {
+    width: 95%;
+    height: 100%;
+    line-height: 100%;
+}
+
+#auto-scroll {
+    margin: auto;
+    width: 3%;
+    height: 80%;
+}

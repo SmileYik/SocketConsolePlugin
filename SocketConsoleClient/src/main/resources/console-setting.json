@@ -1,0 +1,10 @@
+{
+  "host": "127.0.0.1",
+  "port": 16500,
+  "users": [
+    {
+      "username": "admin",
+      "password": "admin"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+# 项目排除路径
+/out/
+/SocketConsolePlugin/.gradle/
+/SocketConsolePlugin/build/
+/SocketConsolePlugin/build/classes/java/main/
