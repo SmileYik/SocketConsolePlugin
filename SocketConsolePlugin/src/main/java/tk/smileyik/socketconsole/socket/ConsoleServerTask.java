@@ -35,7 +35,7 @@ public class ConsoleServerTask extends TimerTask {
       }
     } catch (IOException e) {
       cancel();
-      return;
+      close();
     }
   }
 
@@ -52,6 +52,7 @@ public class ConsoleServerTask extends TimerTask {
   }
 
   public void close() {
+    cancel();
     try {
       reader.close();
     } catch (IOException e) {

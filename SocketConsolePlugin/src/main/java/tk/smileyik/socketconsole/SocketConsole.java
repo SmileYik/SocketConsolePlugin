@@ -2,6 +2,7 @@ package tk.smileyik.socketconsole;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import tk.smileyik.socketconsole.socket.ConsoleServer;
+import tk.smileyik.socketconsole.socket.SocketLoggerManager;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -55,5 +56,11 @@ public class SocketConsole extends JavaPlugin {
 
   public static void log(String msg) {
     instance.getLogger().info(msg);
+  }
+
+  @Override
+  public void onDisable() {
+    ConsoleServer.setEnable(false);
+    SocketLoggerManager.stop();
   }
 }

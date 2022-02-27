@@ -7,6 +7,12 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ConsoleServer {
+  public static boolean enable = true;
+
+  public static void setEnable(boolean enable) {
+    ConsoleServer.enable = enable;
+  }
+
   public static void start(int port) {
     ServerSocket serverSocket = null;
     try {
@@ -14,8 +20,9 @@ public class ConsoleServer {
     } catch (IOException e) {
       return;
     }
+    setEnable(true);
     SocketConsole.getInstance().getLogger().info("server listening port " + port);
-    while (true) {
+    while (enable) {
       try {
         Socket clientSocket = serverSocket.accept();
         if (SocketConsole.validIp(clientSocket.getInetAddress().getHostAddress())) {

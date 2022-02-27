@@ -42,15 +42,22 @@ public class SocketLoggerManager extends TimerTask {
   public synchronized static void stop() {
     timer.cancel();
     timer = null;
+    for (ConsoleServerTask task : tasks) {
+      task.close();
+    }
+    tasks.clear();
   }
 
   private String getLog() throws IOException {
     StringBuilder sb = new StringBuilder();
     String str;
-    while ((str = reader.readLine()) != null) {
-      sb.append(str).append('\n');
+    if (reader.ready()) {
+      while ((str = reader.readLine()) != null) {
+        sb.append(str).append('\n');
+      }
+      return sb.toString();
     }
-    return sb.toString();
+    return "";
   }
 
   @Override
