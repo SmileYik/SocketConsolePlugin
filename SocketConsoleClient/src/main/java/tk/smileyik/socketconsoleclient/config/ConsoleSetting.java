@@ -8,6 +8,8 @@ public class ConsoleSetting {
   private String host;
   private int port;
   private List<User> users;
+  private String iohost;
+  private int ioport;
 
   public ConsoleSetting() {
 
@@ -17,6 +19,14 @@ public class ConsoleSetting {
     this.host = host;
     this.port = port;
     this.users = users;
+  }
+
+  public ConsoleSetting(String host, int port, List<User> users, String iohost, int ioport) {
+    this.host = host;
+    this.port = port;
+    this.users = users;
+    this.iohost = iohost;
+    this.ioport = ioport;
   }
 
   public String getHost() {
@@ -50,5 +60,21 @@ public class ConsoleSetting {
             ", port=" + port +
             ", users=" + users +
             '}';
+  }
+
+  public String getIohost() {
+    return iohost;
+  }
+
+  public void setIohost(String iohost) {
+    this.iohost = iohost;
+  }
+
+  public int getIoport() {
+    return ioport;
+  }
+
+  public void setIoport(int ioport) {
+    this.ioport = ioport;
   }
 }

@@ -1,4 +1,4 @@
-package tk.smileyik.socketconsole.socket;
+package tk.smileyik.socketconsole.socket.console;
 
 import tk.smileyik.socketconsole.SocketConsole;
 

@@ -1,10 +1,13 @@
 package tk.smileyik.socketconsole;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import tk.smileyik.socketconsole.socket.ConsoleServer;
-import tk.smileyik.socketconsole.socket.SocketLoggerManager;
+import tk.smileyik.socketconsole.socket.console.ConsoleServer;
+import tk.smileyik.socketconsole.socket.console.SocketLoggerManager;
+import tk.smileyik.socketconsole.socket.io.IOCommand;
+import tk.smileyik.socketconsole.socket.io.IOSocket;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,10 +33,18 @@ public class SocketConsole extends JavaPlugin {
 
     ips = getConfig().getStringList("white-list");
     int port = getConfig().getInt("port");
+    int ioPort = getConfig().getInt("io-port", 16565);
+
+    try {
+      IOCommand.setBasePath(getDataFolder().getCanonicalFile().getParentFile().getParentFile());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
     getServer().getScheduler().runTaskAsynchronously(this, () -> {
       new Thread(() -> ConsoleServer.start(port)).start();
+      new Thread(() -> IOSocket.start(ioPort)).start();
     });
-
   }
 
   public static SocketConsole getInstance() {
@@ -61,6 +72,7 @@ public class SocketConsole extends JavaPlugin {
   @Override
   public void onDisable() {
     ConsoleServer.setEnable(false);
+    IOSocket.setEnable(false);
     SocketLoggerManager.stop();
   }
 }

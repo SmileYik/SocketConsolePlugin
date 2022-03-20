@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Console</title>
+    <link rel="stylesheet" type="text/css" href="css/file.css" />
+</head>
+<body>
+<div class="list-box">
+    <textarea id="ls" readonly></textarea>
+    <input id="path" type="text" value="/">
+    <button onclick="iofile.ls_btn()">查寻目录</button>
+</div>
+<div class="edit-div">
+    <textarea id="edit-area"></textarea>
+    <div class="edit-ctrl">
+        <input id="edit-path" type="text">
+        <button onclick="iofile.cat_btn()">查看文件</button>
+        <button onclick="iofile.write_btn()">发送文件</button>
+    </div>
+</div>
+
+<script src="../js/request.js"></script>
+<script src="js/file.js"></script>
+</body>
+</html>

@@ -61,8 +61,26 @@ public class SocketConsoleClient {
       writer.write(str);
       writer.flush();
     } catch (IOException e) {
-      e.printStackTrace();
+      reconnect();
     }
+  }
+
+  private void reconnect() {
+    stop();
+    Logger logger = Logger.getLogger("SocketClient");
+
+    new Timer().schedule(new TimerTask() {
+      @Override
+      public void run() {
+        logger.warning("Try to reconnect to server ...");
+        try {
+          start();
+          logger.warning("Reconnect to server successes ...");
+        } catch (IOException ex) {
+          logger.warning("Reconnect to server failed ...");
+        }
+      }
+    }, 1000L);
   }
 
   @Async
@@ -74,21 +92,7 @@ public class SocketConsoleClient {
         sb.append(str).append('\n');
       }
     } catch (Exception e) {
-      stop();
-      Logger logger = Logger.getLogger("SocketClient");
-
-      new Timer().schedule(new TimerTask() {
-        @Override
-        public void run() {
-          logger.warning("Try to reconnect to server ...");
-          try {
-            start();
-            logger.warning("Reconnect to server successes ...");
-          } catch (IOException ex) {
-            logger.warning("Reconnect to server failed ...");
-          }
-        }
-      }, 1000L);
+      reconnect();
     }
 
     if (sb.length() != 0) {

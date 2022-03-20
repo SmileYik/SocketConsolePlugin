@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.list-box {
+    width: 25vw;
+    height: 95vh;
+    background: bisque;
+    float: left;
+}
+
+#ls {
+    width: 90%;
+    height: 85%;
+    margin: 1vw;
+}
+
+#path {
+    margin: 0 1vw 0 1vw;
+    width: 90%;
+}
+
+.list-box button {
+    margin: 0 1vw 0 1vw;
+    width: 91%;
+}
+
+
+
+.edit-div {
+    width: 75vw;
+    height: 95vh;
+    background: aqua;
+    float: right;
+}
+
+#edit-area {
+    width: 95%;
+    height: 85%;
+    margin: 2vw;
+}
+
+.edit-ctrl {
+    width: 95%;
+    margin: 0 1vw 0 2vw;
+}

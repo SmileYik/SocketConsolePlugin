@@ -1,17 +1,15 @@
-package tk.smileyik.socketconsole.socket;
+package tk.smileyik.socketconsole.socket.io;
 
 import tk.smileyik.socketconsole.SocketConsole;
+import tk.smileyik.socketconsole.socket.console.SocketLoggerManager;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ConsoleServer {
-  public static boolean enable = true;
+public class IOSocket {
+  private static boolean enable = false;
 
-  public static void setEnable(boolean enable) {
-    ConsoleServer.enable = enable;
-  }
 
   public static void start(int port) {
     ServerSocket serverSocket = null;
@@ -21,19 +19,26 @@ public class ConsoleServer {
       return;
     }
     setEnable(true);
-    SocketConsole.getInstance().getLogger().info("server listening port " + port);
-    while (enable) {
+    SocketConsole.getInstance().getLogger().info("IO server listening port " + port);
+    while (isEnable()) {
       try {
         Socket clientSocket = serverSocket.accept();
         if (SocketConsole.validIp(clientSocket.getInetAddress().getHostAddress())) {
-          SocketLoggerManager.accept(clientSocket);
-          SocketConsole.log("Remote connect: " + clientSocket.getInetAddress());
+          IOSocketTask.accept(clientSocket);
         } else {
-          SocketConsole.log("Block remote connect: " + clientSocket.getInetAddress());
+          SocketConsole.log("Block remote IO connect: " + clientSocket.getInetAddress());
         }
       } catch (IOException e) {
         e.printStackTrace();
       }
     }
+  }
+
+  public static void setEnable(boolean enable) {
+    IOSocket.enable = enable;
+  }
+
+  public static boolean isEnable() {
+    return enable;
   }
 }
